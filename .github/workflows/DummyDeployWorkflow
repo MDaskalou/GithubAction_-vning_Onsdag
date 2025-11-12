@@ -1,0 +1,27 @@
+name: Dummy Deploy Workflow
+
+# Detta gör att du kan starta workflown manuellt från Actions-fliken
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Vilken miljö vill du driftsätta till?'
+        required: true
+        type: choice
+        options:
+          - DEVELOPMENT
+          - PRODUCTION
+
+jobs:
+  deploy:
+    # Namnet på jobbet blir dynamiskt baserat på ditt val
+    name: Deploy to ${{ inputs.environment }}
+
+    # Viktigt: Här kopplas jobbet till den miljö du valde
+    environment: ${{ inputs.environment }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print environment name
+        run: echo "Deploy till ${{ github.environment }}"
