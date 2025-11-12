@@ -18,14 +18,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # STEG 1: Skriver ut miljönamnet
       - name: Print environment name
         run: echo "Deploy till ${{ github.environment }}"
 
-      # --- NYTT STEG BÖRJAR HÄR ---
-      # Detta steg mappar först hemligheten till en miljövariabel
-      # som heter 'MIN_NYCKEL'. Detta är bästa praxis.
+      # STEG 2: Skriver ut hemligheten
       - name: Visa maskerad hemlighet
         env:
-          # Mappa GitHub Secret 'MY_API_KEY' till en lokal miljövariabel 'MIN_NYCKEL'
+          # Mappar hemligheten till en variabel
           MY_API_KEY: ${{ secrets.MY_API_KEY }}
-        run: echo "My API key is $MY_API_KEY"
+          
+        # 'run:' är korrekt indenterad och använder variabeln
+        run: echo "Värdet på hemligheten är: $MY_API_KEY"
