@@ -1,0 +1,24 @@
+name: Dummy Deploy Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Vilken miljö vill du driftsätta till?'
+        required: true
+        type: choice
+        options:
+          - DEVELOPMENT
+          - PRODUCTION
+
+jobs:
+  deploy:
+    name: Deploy to ${{ inputs.environment }}
+
+    environment: ${{ inputs.environment }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print environment name
+        run: echo "Deploy till ${{ github.environment }}"
