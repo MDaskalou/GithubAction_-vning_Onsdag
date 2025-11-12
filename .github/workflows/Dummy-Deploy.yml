@@ -13,9 +13,9 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to ${{ github.environment }}
+    name: Deploy to ${{ inputs.environment }}
 
-    environment: ${{ github.environment }}
+    environment: ${{ inputs.environment }}
 
     runs-on: ubuntu-latest
 
