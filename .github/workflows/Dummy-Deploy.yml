@@ -28,4 +28,4 @@ jobs:
         env:
           # Mappa GitHub Secret 'MY_API_KEY' till en lokal miljövariabel 'MIN_NYCKEL'
           MY_API_KEY: ${{ secrets.MY_API_KEY }}
-        run: echo "My API key is $MY_API_KEY
+        run: echo "My API key is $MY_API_KEY"
