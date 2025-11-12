@@ -14,11 +14,19 @@ on:
 jobs:
   deploy:
     name: Deploy to ${{ inputs.environment }}
-
     environment: ${{ inputs.environment }}
-
     runs-on: ubuntu-latest
 
     steps:
       - name: Print environment name
         run: echo "Deploy till ${{ github.environment }}"
+
+      # --- NYTT STEG BÖRJAR HÄR ---
+      # Detta steg mappar först hemligheten till en miljövariabel
+      # som heter 'MIN_NYCKEL'. Detta är bästa praxis.
+      - name: Visa maskerad hemlighet
+        env:
+          # Mappa GitHub Secret 'MY_API_KEY' till en lokal miljövariabel 'MIN_NYCKEL'
+          MIN_NYCKEL: ${{ secrets.MY_API_KEY }}
+        run: echo "Värdet på hemligheten är: $MIN_NYCKEL"
+      # --- NYTT STEG SLUTAR HÄR ---
