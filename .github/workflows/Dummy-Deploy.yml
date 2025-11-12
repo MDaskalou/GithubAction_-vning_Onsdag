@@ -15,7 +15,7 @@ jobs:
   deploy:
     name: Deploy to ${{ inputs.environment }}
 
-    environment: ${{ inputs.environment }}
+    environment: ${{ github.environment }}
 
     runs-on: ubuntu-latest
 
