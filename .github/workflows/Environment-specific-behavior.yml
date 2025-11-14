@@ -1,6 +1,5 @@
 name: Exercise 4 - Branch-based Deploy
 
-# Triggas på push till *alla* branches
 on:
   push:
 
@@ -8,14 +7,8 @@ jobs:
   deploy-dev:
     name: Deploy to DEVELOPMENT (Non-main)
     runs-on: ubuntu-latest
-    
-    # Denna kopplar till din 'DEVELOPMENT'-miljö
     environment: DEVELOPMENT
-    
-    # 'if'-sats på jobb-nivå:
-    # Körs ENDAST om branchen INTE är 'main'
     if: github.ref_name != 'main'
-    
     steps:
       - name: Print dev message
         run: |
@@ -26,15 +19,8 @@ jobs:
   deploy-prod:
     name: Deploy to PRODUCTION (Main)
     runs-on: ubuntu-latest
-    
-    # Denna kopplar till din 'PRODUCTION'-miljö
-    # Den kommer att vänta på godkännande pga dina regler!
     environment: PRODUCTION
-    
-    # 'if'-sats på jobb-nivå:
-    # Körs ENDAST om branchen ÄR 'main'
     if: github.ref_name == 'main'
-    
     steps:
       - name: Print prod message
         run: |
