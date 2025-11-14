@@ -23,4 +23,4 @@ jobs:
     steps:
       - name: Print selected environment
         # Detta bör nu fungera
-        run: echo "Deploying to ${{ job.environment.name }}"
+        run: echo "Deploying to ${{ inputs.environment_choice }}"
