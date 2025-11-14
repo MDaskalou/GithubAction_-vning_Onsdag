@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  use-variable:
-    name: Use Repo Variable
+  deploy:
+    name: 🧩 Deploy with SERVICE_NAME
     runs-on: ubuntu-latest
     environment: DEVELOPMENT
-    
     steps:
-      - name: Print variable
+      - name: 🏁 Start Deployment
         shell: bash
-        run: echo "deploying: ${{ vars.SERVICE_NAME }}"
+        run: |
+          echo "deploying: ${{ vars.SERVICE_NAME }}"
