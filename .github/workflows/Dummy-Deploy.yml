@@ -1,9 +1,7 @@
 name: Exercise 1 - Environments
 
 on:
-  # 'workflow_dispatch' låter oss köra den manuellt
   workflow_dispatch:
-    # Här definierar vi de frågor vi vill ställa
     inputs:
       environment_choice:
         type: choice
@@ -18,10 +16,11 @@ jobs:
     name: Deploy to ${{ inputs.environment_choice }}
     runs-on: ubuntu-latest
     
-    # Denna rad är dynamisk!
-    # Den sätter miljö-kontexten baserat på ditt val i dropdown-menyn.
+    # Denna rad är kritisk och måste vara indenterad
+    # exakt så här (med två vanliga mellanslag).
     environment: ${{ inputs.environment_choice }}
     
     steps:
       - name: Print selected environment
+        # Detta bör nu fungera
         run: echo "Deploying to ${{ github.environment }}"
