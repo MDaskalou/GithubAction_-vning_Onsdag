@@ -1,24 +1,27 @@
 name: Exercise 1 - Environments
 
-# Detta gör att du kan starta workflowet manuellt från Actions-fliken
-on: workflow_dispatch
+on:
+  # 'workflow_dispatch' låter oss köra den manuellt
+  workflow_dispatch:
+    # Här definierar vi de frågor vi vill ställa
+    inputs:
+      environment_choice:
+        type: choice
+        description: 'Välj miljö att driftsätta till'
+        options:
+          - DEVELOPMENT
+          - PRODUCTION
+        default: 'DEVELOPMENT'
 
 jobs:
-  deploy-dev:
-    name: Deploy to Dev
+  deploy:
+    name: Deploy to ${{ inputs.environment_choice }}
     runs-on: ubuntu-latest
-    # Talar om för jobbet att det tillhör 'dev'-miljön
-    environment: dev
+    
+    # Denna rad är dynamisk!
+    # Den sätter miljö-kontexten baserat på ditt val i dropdown-menyn.
+    environment: ${{ inputs.environment_choice }}
+    
     steps:
-      - name: Print environment
-        run: echo "Deploying to ${{ github.environment }}"
-
-  deploy-prod:
-    name: Deploy to Prod
-    runs-on: ubuntu-latest
-    # Talar om för jobbet att det tillhör 'prod'-miljön
-    # Detta jobb kommer att pausas och vänta på godkännande pga din regel
-    environment: prod
-    steps:
-      - name: Print environment
+      - name: Print selected environment
         run: echo "Deploying to ${{ github.environment }}"
